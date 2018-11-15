@@ -1,0 +1,128 @@
+{
+  "patientData": {
+    "patientCount": 3,
+    "patients": [
+      {
+        "id": "<Unique ID left as an exercise for the candidate>",
+        "name": "Ainsley Winters"
+      },
+      {
+        "id": "<Unique ID left as an exercise for the candidate>",
+        "name": "Filbert Hammersmith"
+      },
+      {
+        "id": "<Unique ID left as an exercise for the candidate>",
+        "name": "Jean Ralphio"
+      }
+    ]
+  },
+  "orderData": {
+    "deliveryData": {
+      "deliveryCount": 3,
+      "deliveries": [
+        {
+          "id": "<Unique ID left as an exercise for the candidate>",
+          "patientId": "<Ainsley Winters' ID left as an exercise for the candidate>",
+          "address": "1234 Fake Pl, Dallas, TX 12345",
+          "lines": [
+            {
+              "code": "FAKE-001",
+              "description": "Fake item #1",
+              "quantity": 1
+            },
+            {
+              "code": "FAKE-002",
+              "description": "Fake item #2",
+              "quantity": 3
+            }
+          ]
+        },
+        {
+          "id": "<Unique ID left as an exercise for the candidate>",
+          "patientId": "<Filbert Hammersmith's ID left as an exercise for the candidate>",
+          "address": "5524 False Way Apt #42, Austin, TX 22433",
+          "lines": [
+            {
+              "code": "FALSE-025",
+              "description": "False item #25",
+              "quantity": 2
+            },
+            {
+              "code": "FAKE-002",
+              "description": "Fake item #2",
+              "quantity": 2
+            }
+          ]
+        },
+        {
+          "id": "<Unique ID left as an exercise for the candidate>",
+          "patientId": "<Jean Ralphio's ID left as an exercise for the candidate>",
+          "address": "923 Some Pl, Pawnee, IN 53525",
+          "lines": [
+            {
+              "code": "FAKE-001",
+              "description": "Fake item #1",
+              "quantity": 1
+            },
+            {
+              "code": "FAUX-146",
+              "description": "Faux item #146",
+              "quantity": 1
+            },
+            {
+              "code": "FAUX-151",
+              "description": "Faux item #151",
+              "quantity": 1
+            }
+          ]
+        }
+      ]
+    },
+    "pickupData": {
+      "pickupCount": 1,
+      "pickups": [
+        {
+          "id": "<Unique ID left as an exercise for the candidate>",
+          "patientId": "<Filbert Hammersmith's ID left as an exercise for the candidate>",
+          "address": "4545 Lorem Ln, Austin, TX 22435",
+          "lines": [
+            {
+              "code": "FAKE-001",
+              "description": "Fake item #1",
+              "quantity": 1
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "inventoryData": {
+    "inventory": [
+      {
+        "code": "FAKE-001",
+        "description": "Fake item #1",
+        "totalQuantity": 2
+      },
+      {
+        "code": "FAKE-002",
+        "description": "Fake item #2",
+        "totalQuantity": 5
+      },
+      {
+        "code": "FALSE-025",
+        "description": "False item #25",
+        "totalQuantity": 2
+      },
+      {
+        "code": "FAUX-146",
+        "description": "Faux item #146",
+        "totalQuantity": 1
+      },
+      {
+        "code": "FAUX-151",
+        "description": "Faux item #151",
+        "totalQuantity": 1
+      }
+    ]
+  }
+}

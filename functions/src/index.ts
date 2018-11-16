@@ -4,14 +4,22 @@ import * as admin from 'firebase-admin';
 import * as express from 'express';
 import * as bodyParser from "body-parser";
 
+import { PatientService } from './patient.service';
+
 admin.initializeApp(functions.config().firebase);
 
 const db = admin.firestore();
+db.settings({timestampsInSnapshots: true});
+// handline dates
+// New:
+// const timestamp = snapshot.get('created_at');
+// const date = timestamp.toDate();
 
 const app = express();
 const main = express();
 
-const contactsCollection = 'contacts';
+// Initialize services
+const patientService = new PatientService(db);
 
 main.use('/api/v1', app);
 main.use(bodyParser.json());
@@ -23,5 +31,17 @@ export const webApi = functions.https.onRequest(main);
 
 // Infrastructure test
 app.get('/hello', (req, res) => {
-    return res.status(200).send('Hello world!');
+    return res.status(200).send('Hello world rev7!');
+});
+
+// Add a patient
+app.get('/patient/name/:name', async function(req, res) {
+    const result = await patientService.getPatientByName(req.params.name);
+    res.status(result.httpStatus).send(result);
+});
+
+// Add a patient
+app.post('/patient', async function(req, res) {
+    const result = await patientService.addPatient(req.body);
+    res.status(result.httpStatus).send(result);
 });

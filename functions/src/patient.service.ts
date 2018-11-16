@@ -5,7 +5,7 @@ import { Utils } from './common/utils';
 
 export class PatientService {
     private db: any = null;
-    private mydb = admin.firestore();
+    // private mydb = admin.firestore();
 
     constructor(db: any) {
         this.db = db;
@@ -56,18 +56,7 @@ export class PatientService {
         //check to see if key exists
         // If exists, return error
         //Use name key to find matching patients
-        const patientsRef = this.mydb.collection('Patients');
-        const keycheckResults = await patientsRef.where('key', '==', patient.key).get()
-        .then(snapshot => {
-            if(!snapshot.empty) {
-                return { isValid: false, message: 'Patient with that name exists', httpStatus: 400 };
-            }
-            return { isValid: true, message: 'Valid patient name', httpStatus: 200 };
-        })
-        .catch(err => {
-            console.error('Error getting patient ' + patient.key + ': ' + err);
-            return { isValid: false, message: 'ERROR getting patient', httpStatus: 500 };
-        });
+        const keycheckResults = await this.patientExists(patient.key)
         if (!keycheckResults.isValid) return keycheckResults;
 
         // Add patient
@@ -98,8 +87,9 @@ export class PatientService {
         .then(snapshot => {
             const foundPatients: IPatient[] = new Array();
             snapshot.forEach(doc => {
-                console.log(doc.id, '=>', doc.data());
-                foundPatients.push(PatientService.sanitizePatient(doc.data()));
+                const tempPatient: IPatient = doc.data();
+                tempPatient.id = doc.id;
+                foundPatients.push(PatientService.sanitizePatient(tempPatient));
             });
             return { isValid: true, message: foundPatients, httpStatus: 200 };
         })
@@ -109,6 +99,25 @@ export class PatientService {
         });
 
         return results;
+    }
+
+    async patientExists(key: string) {
+        // If exists, return error
+        //Use name key to find matching patients
+        const patientsRef = this.db.collection('Patients');
+        const keycheckResults = await patientsRef.where('key', '==', key).get()
+        .then(snapshot => {
+            if(!snapshot.empty) {
+                return { isValid: false, message: 'Patient with that name exists', httpStatus: 400 };
+            }
+            return { isValid: true, message: 'Valid patient name', httpStatus: 200 };
+        })
+        .catch(err => {
+            console.error('Error getting patient ' + key + ': ' + err);
+            return { isValid: false, message: 'ERROR getting patient', httpStatus: 500 };
+        });
+
+        return keycheckResults;
     }
 
 }

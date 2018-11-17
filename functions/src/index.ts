@@ -33,7 +33,7 @@ export const webApi = functions.https.onRequest(main);
 
 // Infrastructure test
 app.get('/hello', (req, res) => {
-    return res.status(200).send('Hello world rev11!');
+    return res.status(200).send('Hello world rev13!');
 });
 
 // Get a patient
@@ -54,8 +54,20 @@ app.post('/order', async function(req, res) {
     res.status(result.httpStatus).send(result);
 });
 
+// Add multiple orders
+app.post('/orders', async function(req, res) {
+    const result = await orderService.addOrdersMultiple(req.body);
+    res.status(result.httpStatus).send(result);
+});
+
 // Import JSON formatted file of orders
 // app.post('/order/import', upload.single('file'), async function(req, res) {
 //     const result = await orderService.importOrders(req.file);
 //     res.status(result.httpStatus).send(result);
 // });
+
+// Get order summary
+app.get('/order/summary', async function(req, res) {
+    const result = await orderService.getOrderSummary();
+    res.status(result.httpStatus).send(result);
+});

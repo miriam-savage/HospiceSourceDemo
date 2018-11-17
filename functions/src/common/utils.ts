@@ -21,4 +21,33 @@ export class Utils {
         if (list.length == 0) return true;
         return false;
     }
+
+    static sortByString(items: any[], field: string, ascending?: boolean): any[] {
+        const asc = Utils.isEmpty(ascending) ? true : ascending;
+        if (Utils.isEmptyList(items)) { return items; }
+        // tslint:disable-next-line:only-arrow-functions
+        items.sort(function(a, b) {
+            const nameA = a[field].toUpperCase();
+            const nameB = b[field].toUpperCase();
+            if (asc) {
+                if (nameA < nameB) {
+                    return -1;
+                }
+                if (nameA > nameB) {
+                    return 1;
+                }
+                return 0;
+            } else {
+                if (nameA > nameB) {
+                    return -1;
+                }
+                if (nameA < nameB) {
+                    return 1;
+                }
+                return 0;
+            }
+
+        });
+        return items;
+    }
 }

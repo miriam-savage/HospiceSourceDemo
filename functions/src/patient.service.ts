@@ -21,7 +21,7 @@ export class PatientService {
         };
 
         if (json.hasOwnProperty('id')) patient.id = json.id;
-        if (json.hasOwnProperty('address2')) patient.id = json.address2;
+        if (json.hasOwnProperty('address2')) patient.address2 = json.address2;
         if (json.hasOwnProperty('key')) patient.key = json.key;
 
         return patient;
